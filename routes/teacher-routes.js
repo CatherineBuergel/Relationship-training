@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Teachers = require('../models/Teacher');
+let Students = require('../models/Student')
 
 router.use('*', (req, res, next) => {
   console.log('A new Teacher');
@@ -19,6 +20,13 @@ router.get('', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Teachers.findById(req.params.id)
     .then(teacher => res.send(teacher))
+    .catch(err => res.status(400).send(err))
+})
+
+
+router.get('/:id/students', (req, res, next) => {
+  Students.find({ teacher: req.params.id })
+    .then(students => res.send(students))
     .catch(err => res.status(400).send(err))
 })
 

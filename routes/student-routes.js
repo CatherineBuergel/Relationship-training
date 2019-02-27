@@ -8,13 +8,15 @@ router.use('*', (req, res, next) => {
 
 router.get('', (req, res, next) => {
   Students.find({})
-    .then(student => {
-      res.send(student)
+    .then(students => {
+      res.send(students)
     })
     .catch(err => {
       res.status(500).send({ Error: err })
     })
 });
+
+
 
 router.get('/:id', (req, res, next) => {
   Students.findById(req.params.id)
